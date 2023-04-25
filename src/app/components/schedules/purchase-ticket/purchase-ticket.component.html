@@ -1,0 +1,331 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Purchase Ticket'">
+      </app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <h2>
+              <strong>Go through the steps for a complete purchase</strong>
+            </h2>
+          </div>
+          <div class="body">
+            <mat-horizontal-stepper [linear]="isLinear" #stepper>
+              <mat-step [stepControl]="HFormGroup1">
+                <ng-template matStepLabel>Ticket Details</ng-template>
+                <div class="row row-sm">
+                  <div class="col-lg-12 col-md-12">
+                    <div class="card">
+                      <div class="header">
+                        <h2>
+                          <strong>Trip Details</strong>
+                        </h2>
+                      </div>
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-lg-3 col-md-3">
+                            <h6><span>Route</span></h6>
+                            <p class="mb-6">
+                              {{trip?.routeName}}
+                            </p>
+                          </div>
+                          <div class="col-lg-3 col-md-3">
+                            <h6><span>Bus</span></h6>
+                            <p class="mb-6">
+                              {{trip?.busName}}
+                            </p>
+                          </div>
+                          <div class="col-lg-3 col-md-3">
+                            <h6><span>Bus Type</span></h6>
+                            <p class="mb-6">
+                              {{trip?.busTypeName}}
+                            </p>
+                          </div>
+                          <div class="col-lg-3 col-md-3">
+                            <h6><span>Start Time</span></h6>
+                            <p class="mb-6">
+                              {{trip?.startTime | date: 'd-MMM-y, h:mm a'}}
+                            </p>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                      <div class="header">
+                        <h2>
+                          <strong>Bus Departure Times</strong>
+                        </h2>
+                      </div>
+                      <div class="body">
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-md-10">
+                              <ul class="left-timeline" *ngFor="let station of trip?.departures">
+                                <li>
+                                  <time class="left-time" [datetime]="station.departureTime"><span
+                                      class="hidden">{{station.departureTime | date: 'h:mm a'}}</span>
+                                  </time>
+                                  <div class="left-icon"><img src="assets/images/andrea/blue.jpg" alt="" width="40px"
+                                      height="40px">
+                                  </div>
+                                  <div class="left-label empty"> <span>{{station.stationName}}</span> </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12 col-md-12">
+
+                  <form [formGroup]="HFormGroup1">
+                    <div class="card">
+                      <div class="header">
+                        <h2>
+                          <strong>Select Stations</strong>
+                        </h2>
+                      </div>
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-lg-6 col-md-6">
+                            <label>Start</label>
+                            <mat-form-field class="example-full-width">
+                              <mat-select formControlName="startStationId" placeholder="Start"
+                                (selectionChange)="getTicketPrice()">
+                                <mat-option *ngFor="let station of stations" [value]="station.id">{{station.name}}
+                                </mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="HFormGroup1.get('startStationId').hasError('required')">
+                                Required
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-lg-6 col-md-6">
+                            <label>End</label>
+                            <mat-form-field class="example-full-width">
+                              <mat-select formControlName="endStationId" placeholder="End"
+                                (selectionChange)="getTicketPrice()">
+                                <mat-option *ngFor="let station of stations" [value]="station.id">{{station.name}}
+                                </mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="HFormGroup1.get('endStationId').hasError('required')">
+                                Required
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-lg-6 col-md-6">
+                            <label>Seat:</label>
+                            <mat-radio-group [(ngModel)]="statusStanding" formControlName="statusStanding" (ngModelChange)="availableSeat()">
+                              <mat-radio-button class="example-margin" value="false">Seated</mat-radio-button>
+                              <mat-radio-button class="example-margin" value="true">Standing
+                              </mat-radio-button>
+                            </mat-radio-group>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div>
+                      <div class="row">
+                        <div class="col">
+                          <div class="row">
+                            <div class="col-lg-11 text-end">
+
+                              <label class="fs-5 text"><b>Price: </b>($)</label>
+                            </div>
+                            <div class="col-lg-1 text-end">
+                              <p class="fs-5 text">{{price}}</p>
+
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-12 text-end">
+                          <button mat-raised-button matStepperNext color="primary"
+                            [disabled]="!HFormGroup1.valid || !foundPrice || !isSeatAvailable">Next</button>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </form>
+                </div>
+              </mat-step>
+              <mat-step [stepControl]="HFormGroup2">
+                <form [formGroup]="HFormGroup2">
+                  <ng-template matStepLabel>Your Details</ng-template>
+                  <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                      <div class="card">
+                        <div class="header">
+                          <h2>
+                            <strong>Your Details</strong>
+                          </h2>
+                        </div>
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-lg-4 col-md-4">
+                              <h6 class="text-center"><span>First Name</span></h6>
+                              <p class="mb-6 text-center">
+                                {{user?.firstName}}
+                              </p>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                              <h6 class="text-center"><span>Last Name</span></h6>
+                              <p class="mb-6 text-center">
+                                {{user?.lastName}}
+                              </p>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                              <h6 class="text-center"><span>Email</span></h6>
+                              <p class="mb-6 text-center">
+                                {{user?.email}}
+                              </p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <mat-card-content>
+                              <div class="col-lg-3">
+                                <div class="payment-type-container text-end">
+                                  <mat-radio-group aria-label="Select an option" [selected]="visa">
+                                    <mat-radio-button #visa value="visa"><img class="payment-logo"
+                                        src="https://res.cloudinary.com/ffdc/image/upload/v1593768892/cards_logos_drnu5h.png"></mat-radio-button>
+                                    
+                                  </mat-radio-group>
+                                </div>
+
+                              </div>
+
+                              <div class="col-lg-12">
+                                <div class="row">
+                                  <div class="col-lg-3">
+                                    <h6 class="text-end" style="margin-top:20px; "><span>Card Number</span></h6>
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <div class="card-form-container">
+                                        <mat-form-field appearance="fill" dense class="example-full-width">
+                                            <mat-icon matPrefix dense color="primary">payment</mat-icon>
+                                            <!-- <mat-label>Card number</mat-label> -->
+                                            <input matInput #input maxlength="16" placeholder="Enter card number"
+                                              value="9871-5000-3456-8374" />
+                                            <mat-hint align="end">{{ input.value?.length || 0 }}/19</mat-hint>
+                                          </mat-form-field>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+
+                              <div class="col-lg-12">
+                                <div class="row">
+                                  <div class="col-lg-3">
+                                    <h6 class="text-end" style="margin-top:20px; "><span>Expiry Date</span></h6>
+                                  </div>
+                                  <div class="col-lg-3">
+                                    <mat-form-field class="expire-month" dense>
+                                      <mat-label>Month</mat-label>
+                                      <select matNativeControl>
+                                        <option value="january">01</option>
+                                        <option value="february">02</option>
+                                        <option value="march">03</option>
+                                        <option value="april">04</option>
+                                        <option value="may">05</option>
+                                        <option value="june">06</option>
+                                        <option value="july">07</option>
+                                        <option value="august">08</option>
+                                        <option value="september">09</option>
+                                        <option value="october">10</option>
+                                        <option value="november">11</option>
+                                        <option value="december">12</option>
+                                      </select>
+                                    </mat-form-field>
+                                  </div>
+                                  <div class="col-lg-3 text-end">
+                                    <mat-form-field class="expire-month" dense>
+                                      <mat-label>Year</mat-label>
+                                      <select matNativeControl>
+                                        <option value="january">2023</option>
+                                        <option value="february">2024</option>
+                                        <option value="march">2025</option>
+                                        <option value="april">2026</option>
+                                        <option value="april">2027</option>
+                                      </select>
+                                    </mat-form-field>
+                                  </div>
+                                </div>
+
+                              </div>
+                              <div class="col-lg-12">
+                                <div class="row">
+                                  <div class="col-lg-3">
+                                    <h6 class="text-end" style="margin-top:20px; "><span>On the back</span></h6>
+                                  </div>
+                                  <div class="col-lg-3">
+                                    <mat-form-field dense appearance="fill" >
+                                      <mat-label>CVC</mat-label>
+                                      <input type="text" min="0" maxlength="3" matInput formControlName="address"/>
+                                    </mat-form-field>
+                                  </div>
+                                  
+                                </div>
+
+                              </div>
+                             
+                              
+                            </mat-card-content>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                    <div class="row">
+                      <div class="col-lg-12 text-end">
+                        <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Back</button>
+                        <button mat-raised-button matStepperNext color="primary"
+                          [disabled]="!HFormGroup2.valid">Next</button>
+
+                      </div>
+                  </div>
+                 
+                </form>
+              </mat-step>
+              <mat-step>
+                <ng-template matStepLabel>Done</ng-template>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <p class="text-center">You are now done.</p>
+
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12 text-end">
+                    <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Back</button>
+                    <button mat-raised-button color="info" (click)="stepper.reset()">Reset</button>
+                    <button mat-raised-button color="primary" type="submit" (click)="Submit()">Confirm</button>
+
+                  </div>
+              </div>
+                <div>
+                 
+                </div>
+              </mat-step>
+            </mat-horizontal-stepper>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

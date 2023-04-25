@@ -1,0 +1,48 @@
+{
+  "HEADER":{
+    "SEARCH": {
+      "TEXT": "Search.."
+    }
+  },
+  "MENUITEMS": {
+    "USER":{
+      "POST": "Manager"
+    },
+    "MAIN": {
+      "TEXT": "Main"
+    },
+    "BUS-TYPES":{
+      "TEXT": "Bus Types"
+    },
+    "BUSES":{
+      "TEXT": "Buses"
+    },
+    "ROUTES":{
+      "TEXT": "Routes"
+    },
+    "SEATS":{
+      "TEXT": "Seats"
+    },
+    "STATIONS":{
+      "TEXT": "Stations"
+    },
+    "TRIPS":{
+      "TEXT": "Trips"
+    },
+    "TICKETS":{
+      "TEXT": "Tickets"
+    },
+    "PAYMENTS":{
+      "TEXT": "Payments"
+    },
+    "USERS":{
+      "TEXT": "Users"
+    },
+    "SCHEDULES":{
+      "TEXT": "Schedules"
+    },
+    "PURCHASED":{
+      "TEXT": "Purchased Tickets"
+    }
+  }
+}

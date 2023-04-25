@@ -1,0 +1,30 @@
+{
+    "HEADER":{
+      "SEARCH": {
+        "TEXT": "Search.."
+      }
+    },
+    "MENUITEMS": {
+      "USER":{
+        "POST": "Manager"
+      },
+      "MAIN": {
+        "TEXT": "Main"
+      },
+      "BUS-TYPES":{
+        "TEXT": "Type d'autobus"
+      },
+      "BUSES":{
+        "TEXT": "Les autobus"
+      },
+      "ROUTES":{
+        "TEXT": "Itinéraires"
+      },
+      "SEATS":{
+        "TEXT": "Des places"
+      },
+      "USERS":{
+        "TEXT": "Users"
+      }
+    }
+  }

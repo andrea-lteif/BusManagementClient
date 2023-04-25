@@ -1,0 +1,88 @@
+<div class="addContainer">
+    <div class="modalHeader">
+        <div class="editRowModal">
+            <div class="modalHeader clearfix">
+                <div class="modal-about">
+                    {{dialogTitle}}
+                </div>
+            </div>
+        </div>
+        <button mat-icon-button (click)="dialogRef.close()" class="modal-close-button" aria-label="Close dialog">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div mat-dialog-content>
+        <form class="register-form m-4" [formGroup]="tripForm" (ngSubmit)="Submit()">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <div class="m-b-20">
+                        <label>Route</label>
+                        <mat-form-field class="example-full-width">
+                            <mat-select formControlName="routeId" placeholder="Route">
+                              <mat-option *ngFor="let route of routes" [value]="route.id">{{route.name}}
+                              </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="tripForm.get('routeId').hasError('required')">
+                                Required
+                            </mat-error>
+                          </mat-form-field>
+                    </div>
+                </div>
+             
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <div class="m-b-20">
+                        <label>Bus</label>
+                        <mat-form-field class="example-full-width">
+                            <mat-select formControlName="busId" placeholder="Bus">
+                              <mat-option *ngFor="let bus of buses" [value]="bus.id">{{bus.name}}
+                              </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="tripForm.get('busId').hasError('required')">
+                                Required
+                            </mat-error>
+                          </mat-form-field>
+                    </div>
+                </div>
+             
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <label>Start Date/Time</label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" formControlName="startTime" placeholder="Date/Time"
+                            [disabled]="false">
+                           <mat-error *ngIf="tripForm.get('startTime').hasError('required')">
+                            Required
+                        </mat-error>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <ngx-mat-datetime-picker #picker [showSpinners]="true" [showSeconds]="false"
+                           [stepHour]="1" [stepMinute]="1" [stepSecond]="0"
+                           [touchUi]="false" color="blue" [enableMeridian]="true" 
+                           [disableMinute]="false" [hideTime]="false">
+                        </ngx-mat-datetime-picker>
+                     </mat-form-field>
+                </div>
+                
+            </div>
+           
+            
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <div class="example-button-row" style="float: right;">
+                        <!-- <button mat-raised-button color="primary" type="submit" [disabled]="!advanceTableForm.valid"
+                            [mat-dialog-close]="1" (click)="confirmAdd()">Save</button> -->
+                            <button mat-raised-button type="submit" class="btn-primary"         
+                            [disabled]="submitting">
+                            <i class="fas fa-spinner fa-spin" *ngIf="submitting"></i>
+                            <!-- <mat-icon *ngIf="!submitting">save</mat-icon> -->
+                            Save
+                          </button>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

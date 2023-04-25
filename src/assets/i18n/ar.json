@@ -1,0 +1,30 @@
+{
+    "HEADER":{
+      "SEARCH": {
+        "TEXT": "Search.."
+      }
+    },
+    "MENUITEMS": {
+      "USER":{
+        "POST": "Manager"
+      },
+      "MAIN": {
+        "TEXT": "Main"
+      },
+      "BUS-TYPES":{
+        "TEXT": "أنواع الحافلات"
+      },
+      "BUSES":{
+        "TEXT": "الباصات"
+      },
+      "ROUTES":{
+        "TEXT": "الطرق"
+      },
+      "SEATS":{
+        "TEXT": "المقاعد"
+      },
+      "USERS":{
+        "TEXT": "Users"
+      }
+    }
+  }

@@ -1,0 +1,205 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Schedules'"></app-breadcrumb>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="hi">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 pl-5">
+                                <h5>Buses in Route</h5>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <h5>Route Completion</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <div class="m-2" *ngFor="let trip of currentTrips">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div>{{trip.busName}}</div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div>{{trip.routeName}}</div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mt-1">
+                                        <mat-progress-bar mode="determinate"
+                                            class="progress-m progress-round blue-progress progress-shadow"
+                                            [value]="trip.percentage">
+                                        </mat-progress-bar>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-2" *ngIf="currentTrips?.length === 0">
+                            <div class="row">
+                                No busses currently in route
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-xl-8 ">
+                <div class="card">
+                    <div class="header">
+                        <h2>Search for trips</h2>
+
+                    </div>
+                    <div class="body">
+                        <form class="register-form m-4" [formGroup]="scheduleForm" (ngSubmit)="getSchedule()">
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                                    <label>Date</label>
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput [matDatepicker]="picker" formControlName="date"
+                                            placeholder="Date">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                                    <div class="m-b-20">
+                                        <label>Route</label>
+                                        <mat-form-field class="example-full-width" appearance="outline">
+                                            <mat-select formControlName="routeId" placeholder="Route" (ngModelChange)="getStations()">
+                                                <mat-option *ngFor="let route of routes" [value]="route.id">
+                                                    {{route.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                                    <div class="m-b-20">
+                                        <label>Start Station</label>
+                                        <mat-form-field class="example-full-width" appearance="outline">
+                                            <mat-select formControlName="startStationId" placeholder="Start Station">
+                                                <mat-option *ngFor="let station of stations" [value]="station.id">
+                                                    {{station.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                                    <div class="example-button-row" style="float: right;">
+                                        <button mat-raised-button type="submit" class="btn-primary">
+                                            Search
+                                        </button>
+                                        <button mat-raised-button type="submit" class="btn-secondary"
+                                            (click)="ClearFilter()">
+                                            Clear
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                <div class="card">
+
+                    <div class="body">
+                        <img src="assets/images/andrea/tickets.jpg" alt="" style="height: 292px; width: 100%;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Available Trips</h2>
+                    </div>
+                    <div class="body">
+                        <div class="responsive_table">
+                            <table mat-table #table matTableExporter [dataSource]="dataSource" matSort
+                                matSortActive="startTime" matSortDirection="asc" matSortDisableCLear class="mat-cell">
+                                <ng-container matColumnDef="routeName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                        [ngClass]="'tbl-col-width-per-15'">Route</th>
+                                    <td mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-15'">
+                                        {{row.routeName}}</td>
+                                </ng-container>
+                                <ng-container matColumnDef="typeName">
+                                    <th mat-header-cell mat-header-cell *matHeaderCellDef
+                                        [ngClass]="'tbl-col-width-per-10'">Type
+                                    </th>
+                                    <td mat-cell mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-10'">
+                                        {{row.busTypeName}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="busName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                        [ngClass]="'tbl-col-width-per-15'">Bus</th>
+                                    <td mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-15'">
+                                        {{row.busName}}</td>
+                                </ng-container>
+                                <ng-container matColumnDef="startTime">
+                                    <th mat-header-cell mat-header-cell *matHeaderCellDef
+                                        [ngClass]="'tbl-col-width-per-10'">Date/Time
+                                    </th>
+                                    <td mat-cell mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-10'">
+                                        {{row.startTime | date: 'dd-MMM-yyyy, h:mm a'}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="stationName">
+                                    <th mat-header-cell mat-header-cell *matHeaderCellDef
+                                        [ngClass]="'tbl-col-width-per-10'">Station
+                                    </th>
+                                    <td mat-cell mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-10'">
+                                        {{row.stationName}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="stationDepartureTime">
+                                    <th mat-header-cell mat-header-cell *matHeaderCellDef
+                                        [ngClass]="'tbl-col-width-per-10'">Station Departure Time
+                                    </th>
+                                    <td mat-cell mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-10'">
+                                        {{row.stationDepartureTime | date: 'dd-MMM-yyyy, h:mm a'}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="actions">
+                                    <th mat-header-cell class="pr-0" *matHeaderCellDef>Purchase Ticket</th>
+                                    <td mat-cell *matCellDef="let row; let i=index;" class="pr-0">
+                                        <button mat-icon-button color="accent" (click)="$event.stopPropagation()"
+                                            (click)="purchase(row)" class="tbl-action-btn">
+                                            <app-feather-icons [icon]="'edit'"
+                                                [class]="'tbl-fav-edit'"></app-feather-icons>
+                                        </button>
+                                    </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+                            <div *ngIf="!dataSource" class="tbl-spinner">
+                                <mat-progress-spinner color="primary" [diameter]="40" mode="indeterminate">
+                                </mat-progress-spinner>
+                            </div>
+                            <div *ngIf="dataSource.totalRecords$ === 0" class="no-results" style="text-align: center;">
+                                No Records found
+                            </div>
+                            <mat-paginator #paginator [length]="dataSource.totalRecords$" [pageIndex]="0"
+                                [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                            </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
