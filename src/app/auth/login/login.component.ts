@@ -65,7 +65,7 @@ export class LoginComponent {
           let user : User = resp.result;
           sessionStorage.setItem('user', JSON.stringify(user));
           this.authService.setUser(user);
-          this.router.navigate(['/schedules/schedules']);
+          this.router.navigate(['/schedules/welcome']);
       }
       else
       {

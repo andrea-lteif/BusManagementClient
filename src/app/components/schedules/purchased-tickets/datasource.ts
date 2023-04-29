@@ -54,8 +54,8 @@ export class PurchasedTicketsDataSource implements DataSource<Ticket>
         this.ticketsService.getByUserId(datatableRequest, userId)
         .pipe(catchError(() => of([])), finalize(() => this.loadingSubject.next(false)))
         .subscribe(resp => {
-            this.purchasedTicketsTotalRecordsSubject.next(resp.result.totalRecord);
-            this.puchasedTicketsSubject.next(resp.result.data);
+            this.purchasedTicketsTotalRecordsSubject.next(resp.totalRecord);
+            this.puchasedTicketsSubject.next(resp.data);
         });
         
 

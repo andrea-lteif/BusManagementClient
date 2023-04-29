@@ -1,7 +1,6 @@
 <section class="content">
     <div class="content-block">
         <div class="block-header">
-            <!-- breadcrumb -->
             <app-breadcrumb [title]="'Schedules'"></app-breadcrumb>
         </div>
         <div class="row">
@@ -58,7 +57,7 @@
                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
                                     <label>Date</label>
                                     <mat-form-field class="example-full-width">
-                                        <input matInput [matDatepicker]="picker" formControlName="date"
+                                        <input matInput [matDatepicker]="picker" formControlName="date" [min]="today"
                                             placeholder="Date">
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker #picker></mat-datepicker>
@@ -93,10 +92,10 @@
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                                     <div class="example-button-row" style="float: right;">
-                                        <button mat-raised-button type="submit" class="btn-primary">
+                                        <button mat-raised-button type="submit" style="color: black; background-color: #F4D38E;">
                                             Search
                                         </button>
-                                        <button mat-raised-button type="submit" class="btn-secondary"
+                                        <button mat-raised-button type="submit" style="background-color: #3f51b5;"
                                             (click)="ClearFilter()">
                                             Clear
                                         </button>
@@ -178,7 +177,7 @@
                                     <td mat-cell *matCellDef="let row; let i=index;" class="pr-0">
                                         <button mat-icon-button color="accent" (click)="$event.stopPropagation()"
                                             (click)="purchase(row)" class="tbl-action-btn">
-                                            <app-feather-icons [icon]="'edit'"
+                                            <app-feather-icons [icon]="'arrow-up-right'"
                                                 [class]="'tbl-fav-edit'"></app-feather-icons>
                                         </button>
                                     </td>
@@ -202,4 +201,4 @@
             </div>
         </div>
     </div>
-</section>
+</section> 

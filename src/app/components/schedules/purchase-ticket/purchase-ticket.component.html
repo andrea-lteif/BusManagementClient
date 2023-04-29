@@ -72,7 +72,7 @@
                                   <time class="left-time" [datetime]="station.departureTime"><span
                                       class="hidden">{{station.departureTime | date: 'h:mm a'}}</span>
                                   </time>
-                                  <div class="left-icon"><img src="assets/images/andrea/blue.jpg" alt="" width="40px"
+                                  <div class="left-icon"><img src="assets/images/andrea/bluee.png" alt="" width="40px"
                                       height="40px">
                                   </div>
                                   <div class="left-label empty"> <span>{{station.stationName}}</span> </div>
@@ -174,7 +174,7 @@
                           </h2>
                         </div>
                         <div class="card-body">
-                          <div class="row">
+                          <!-- <div class="row">
                             <div class="col-lg-4 col-md-4">
                               <h6 class="text-center"><span>First Name</span></h6>
                               <p class="mb-6 text-center">
@@ -193,7 +193,7 @@
                                 {{user?.email}}
                               </p>
                             </div>
-                          </div>
+                          </div> -->
                           <div class="row">
                             <mat-card-content>
                               <div class="col-lg-3">
@@ -292,7 +292,7 @@
                   </div>
                     <div class="row">
                       <div class="col-lg-12 text-end">
-                        <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Back</button>
+                        <button mat-raised-button matStepperPrevious style="background-color: #F4D38E;" class="msr-2">Back</button>
                         <button mat-raised-button matStepperNext color="primary"
                           [disabled]="!HFormGroup2.valid">Next</button>
 
@@ -305,14 +305,14 @@
                 <ng-template matStepLabel>Done</ng-template>
                 <div class="row">
                   <div class="col-lg-12">
-                    <p class="text-center">You are now done.</p>
+                    <h3 class="text-center">Final Confirmation</h3>
 
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-lg-12 text-end">
-                    <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Back</button>
-                    <button mat-raised-button color="info" (click)="stepper.reset()">Reset</button>
+                    <button mat-raised-button matStepperPrevious style="background-color: #F4D38E;" class="msr-2">Back</button>
+                    <!-- <button mat-raised-button color="info" (click)="stepper.reset()">Reset</button> -->
                     <button mat-raised-button color="primary" type="submit" (click)="Submit()">Confirm</button>
 
                   </div>

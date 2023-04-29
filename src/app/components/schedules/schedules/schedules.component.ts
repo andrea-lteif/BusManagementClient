@@ -33,6 +33,7 @@ export class SchedulesComponent implements OnInit{
   };
   routes!:any;
   stations!:any;
+  today!:Date;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -53,6 +54,7 @@ export class SchedulesComponent implements OnInit{
       "startTime",
       "actions"
     ];
+    this.today = new Date();
     this.dataSource = new SchedulesDataSource(this.tripsService);
     this.dataSource.getSchedules(this.filter, "startTime", "asc", 0, 10);
    this.getCurrentTrips();

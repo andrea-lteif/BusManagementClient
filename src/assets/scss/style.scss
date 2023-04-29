@@ -113,17 +113,33 @@ table{
 
 .mat-mdc-slide-toggle.mat-accent {
     /* --mdc-switch-selected-focus-state-layer-color: #d81b60; */
-    --mdc-switch-selected-handle-color: #044B77;
-    /* --mdc-switch-selected-hover-state-layer-color: #d81b60; */
+    --mdc-switch-selected-handle-color:#3f51b5;
+    --mdc-switch-selected-hover-state-layer-color:#0688AE;
     /* --mdc-switch-selected-pressed-state-layer-color: #d81b60; */
     /* --mdc-switch-selected-focus-handle-color: #880e4f; */
-    /* --mdc-switch-selected-hover-handle-color: #880e4f; */
+     --mdc-switch-selected-hover-handle-color: #0688AE; 
     /* --mdc-switch-selected-pressed-handle-color: #880e4f; */
     /* --mdc-switch-selected-focus-track-color: #f06292; */
-    /* --mdc-switch-selected-hover-track-color: #f06292; */
+    --mdc-switch-selected-hover-track-color:#0688AE; 
     /* --mdc-switch-selected-pressed-track-color: #f06292; */
     --mdc-switch-selected-track-color: #0688AE;
 }
+
+.mat-mdc-radio-button.mat-accent {
+    --mdc-radio-disabled-selected-icon-color: #000;
+    --mdc-radio-disabled-unselected-icon-color: #000;
+    --mdc-radio-unselected-focus-icon-color: #212121;
+    --mdc-radio-unselected-hover-icon-color: #212121;
+    --mdc-radio-unselected-icon-color: rgba(0, 0, 0, 0.54);
+    --mdc-radio-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+     --mdc-radio-selected-focus-icon-color: #3f51b5; 
+     --mdc-radio-selected-hover-icon-color: #3f51b5;
+    --mdc-radio-selected-icon-color: #3f51b5; 
+     --mdc-radio-selected-pressed-icon-color: #3f51b5; 
+    --mat-mdc-radio-ripple-color: #000;
+    --mat-mdc-radio-checked-ripple-color: #3f51b5;
+}
+
 
 .mat-mdc-fab.mat-primary, .mat-mdc-mini-fab.mat-primary {
     --mdc-fab-container-color:#044B77;
@@ -141,3 +157,34 @@ table{
     background-color: #fff;
 
 }
+
+body{
+    background-color: #eaeef9;
+}
+
+section.content1 {
+    //margin: 0px 0px 0 0px;
+    min-height: calc(100vh - 20px);
+    transition: 0.5s;
+}
+  
+  .content-block .waw {
+    position: absolute;
+    top: 10%;
+    left: 15%;
+    width: 1100px;
+    color: black;
+    padding: 12px 24px;
+    text-align: center;
+  }
+  
+  .content-block .boo {
+    position: absolute;
+    top: 85%;
+    left: 69%;
+    width: 606px;
+    color: black;
+    padding: 12px 24px;
+    text-align: center;
+  }
+  

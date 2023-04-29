@@ -22,7 +22,7 @@
                        
                       </ul>
                     </div>
-                    <div class="col-4">
+                    <!-- <div class="col-4">
                       <ul class="tbl-export-btn">
                         <li>
                           <div class="m-l-10" matTooltip="ADD">
@@ -32,7 +32,7 @@
                           </div>
                         </li>
                       </ul>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
                 <table mat-table #table matTableExporter [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc" matSortDisableCLear
@@ -63,7 +63,13 @@
                     <td mat-cell mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-10'">{{row.price}}
                     </td>
                   </ng-container>
-                  <ng-container matColumnDef="active">
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-10'">Date
+                    </th>
+                    <td mat-cell mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-10'">{{row.date | date: 'dd-MMM-yyyy, h:mm a'}}
+                    </td>
+                  </ng-container>
+                  <!-- <ng-container matColumnDef="active">
                     <th mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-10'">Active
                     </th>
                     <td mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-10'">
@@ -78,7 +84,7 @@
                         <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
                       </button>
                     </td>
-                  </ng-container>
+                  </ng-container> -->
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>

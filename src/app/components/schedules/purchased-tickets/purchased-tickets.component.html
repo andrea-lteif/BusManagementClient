@@ -9,7 +9,22 @@
           <div class="card">
             <div class="body">
               <div class="responsive_table">
-                <table mat-table #table matTableExporter [dataSource]="dataSource" matSort matSortActive="routeId" matSortDirection="asc" matSortDisableCLear
+                <div class="materialTableHeader">
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ms-0">
+                        
+                        <li class="tbl-search-box">
+                          <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                          <input placeholder="Search" type="text" #filterInput class="browser-default search-field"
+                            aria-label="Search box" (keyup.enter)="doQuickSearch()">
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <table mat-table #table matTableExporter [dataSource]="dataSource" matSort matSortActive="date" matSortDirection="asc" matSortDisableCLear
                 class="mat-cell">
                   <ng-container matColumnDef="routeName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-15'">Route</th>
@@ -29,6 +44,12 @@
                     <th mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-10'">Price
                     </th>
                     <td mat-cell mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-10'">{{row.price}}
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-10'">Date
+                    </th>
+                    <td mat-cell mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-10'">{{row.date | date: 'dd-MMM-yyyy, h:mm a'}}
                     </td>
                   </ng-container>
                  

@@ -88,9 +88,6 @@ export class PurchaseTicketComponent {
   }
 
   getTicketPrice(){
-    if(this.HFormGroup1?.invalid){
-      return;
-    }
     let model : any = {
       startStationId: this.HFormGroup1FormControl['startStationId'].value,
       endStationId: this.HFormGroup1FormControl['endStationId'].value,
@@ -171,13 +168,14 @@ export class PurchaseTicketComponent {
         "center"
       );
     }
-
     let body: Ticket = {
       id: 0,
       busId: this.trip.busId,
       userId: this.user.id,
       routeId: this.trip.routeId,
-      tripId: this.trip.Id,
+      date:null,
+      stationId: [this.HFormGroup1FormControl['startStationId'].value,this.HFormGroup1FormControl['endStationId'].value, ],
+      tripId: this.trip.id,
       price: this.price,
       seatId: this.seatId,
       isActive: true

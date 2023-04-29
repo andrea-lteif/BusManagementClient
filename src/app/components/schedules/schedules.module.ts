@@ -29,12 +29,14 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { PurchasedTicketsComponent } from './purchased-tickets/purchased-tickets.component';
 import { PurchaseTicketComponent } from './purchase-ticket/purchase-ticket.component';
 import { MatStepperModule } from "@angular/material/stepper";
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 @NgModule({
   declarations: [
     SchedulesComponent,
     PurchasedTicketsComponent,
-    PurchaseTicketComponent
+    PurchaseTicketComponent,
+    WelcomePageComponent
   ],
   imports: [
     CommonModule,

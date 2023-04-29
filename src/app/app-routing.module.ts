@@ -97,6 +97,7 @@ const routes: Routes = [
       ),
   },
   { path: "**", component: Page404Component },
+  
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, {})],

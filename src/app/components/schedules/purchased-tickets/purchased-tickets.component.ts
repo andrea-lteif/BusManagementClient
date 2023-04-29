@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { PurchasedTicketsDataSource } from './datasource';
 import { Filter } from 'src/app/shared/models/filter';
 import { MatPaginator } from '@angular/material/paginator';
@@ -19,6 +19,7 @@ export class PurchasedTicketsComponent implements OnInit, AfterViewInit {
     "busName",
     "seatNumber",
     "price",
+    "date"
   ];
   dataSource!: PurchasedTicketsDataSource;
   filter: Filter = {
@@ -28,6 +29,7 @@ export class PurchasedTicketsComponent implements OnInit, AfterViewInit {
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild("filterInput") filterInput!: ElementRef;
 
   constructor(private authService: AuthService, private ticketsService : TicketsService
   ) {}
@@ -35,7 +37,7 @@ export class PurchasedTicketsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.userId = this.authService.user?.id;
     this.dataSource = new PurchasedTicketsDataSource(this.ticketsService);
-    this.dataSource.getPurchasedTickets(this.filter, "routeId", "asc", 0, 10, this.userId);
+    this.dataSource.getPurchasedTickets(this.filter, "date", "asc", 0, 10, this.userId);
   }
 
   ngAfterViewInit() {
@@ -55,6 +57,17 @@ export class PurchasedTicketsComponent implements OnInit, AfterViewInit {
       this.paginator?.pageSize,
       this.userId
     );
+  }
+
+  doQuickSearch() {
+    this.filter.quickSearch = this.filterInput.nativeElement.value;
+    this.loadPuchasedTickets();
+  }
+
+  clearQuickSearch() {
+    this.filter.quickSearch = null;
+    this.filterInput.nativeElement.value = "";
+    this.loadPuchasedTickets();
   }
 
 }

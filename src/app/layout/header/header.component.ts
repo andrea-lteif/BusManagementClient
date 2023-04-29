@@ -45,7 +45,6 @@ export class HeaderComponent
     private router: Router,
     public languageService: LanguageService,
     public dialog: MatDialog,
-
   ) {
     super();
   }
@@ -194,5 +193,9 @@ export class HeaderComponent
       },
       //direction: tempDirection
     });
+  }
+
+  home(){
+    this.router.navigate(['schedules/welcome']);
   }
 }

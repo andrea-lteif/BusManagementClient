@@ -20,7 +20,7 @@ import { BusTypesService } from '../../bus-types/services/bus-types.service';
 export class SeatsComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
     "number",
-    "busType",
+    "busTypeId",
     "statusStanding",
     "active",
   ];

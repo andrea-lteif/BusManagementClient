@@ -16,7 +16,7 @@ export const ROUTES: RouteInfo[] = [
     path: "schedules/schedules",
     title: "MENUITEMS.SCHEDULES.TEXT",
     iconType: "feather",
-    icon: "user",
+    icon: "table",
     class: "",
     groupTitle: false,
     badge: "",
@@ -28,7 +28,7 @@ export const ROUTES: RouteInfo[] = [
     path: "schedules/purchased-tickets",
     title: "MENUITEMS.PURCHASED.TEXT",
     iconType: "feather",
-    icon: "user",
+    icon: "dollar-sign",
     class: "",
     groupTitle: false,
     badge: "",
@@ -131,17 +131,5 @@ export const ROUTES: RouteInfo[] = [
     badgeClass: "",
     submenu: [],
     canAccess: false
-  },
-  {
-    path: "payments/payments",
-    title: "MENUITEMS.PAYMENTS.TEXT",
-    iconType: "feather",
-    icon: "dollar-sign",
-    class: "",
-    groupTitle: false,
-    badge: "",
-    badgeClass: "",
-    submenu: [],
-    canAccess:false
   }
 ];

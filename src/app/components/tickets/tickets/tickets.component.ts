@@ -23,8 +23,7 @@ export class TicketsComponent implements OnInit, AfterViewInit {
     "seatNumber",
     "price",
     "userName",
-    "actions",
-    "active",
+    "date"
   ];
   dataSource!: TicketsDataSource;
   filter: Filter = {
@@ -38,6 +37,8 @@ export class TicketsComponent implements OnInit, AfterViewInit {
     routeId:null,
     userId:null,
     tripId:null,
+    stationId:null,
+    date:null,
     seatId:null,
     isActive : null,
     price: null
@@ -126,13 +127,15 @@ export class TicketsComponent implements OnInit, AfterViewInit {
   addNew() {
     let tempDirection;
     this.ticket = {
-      id: null,
+    id: null,
     busId : null,
     routeId:null,
     userId:null,
     seatId:null,
     tripId:null,
+    date:null,
     price:null,
+    stationId:null,
     isActive : null,
     };
     if (localStorage.getItem('isRtl') === 'true') {

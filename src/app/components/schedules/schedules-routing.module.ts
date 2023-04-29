@@ -4,6 +4,7 @@ import { SchedulesComponent } from './schedules/schedules.component';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { PurchasedTicketsComponent } from './purchased-tickets/purchased-tickets.component';
 import { PurchaseTicketComponent } from './purchase-ticket/purchase-ticket.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,11 @@ const routes: Routes = [
       {
         path: 'schedules',
         component: SchedulesComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'welcome',
+        component: WelcomePageComponent,
         canActivate: [AuthGuard]
       },
       {
